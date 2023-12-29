@@ -41,7 +41,7 @@ if (firstNum !== '' && operationSymbol !== '' && secondNum !== ''){
     tempHolder = '';
 }       
 
-if (firstNum == '' && operationSymbol !== '' && secondNum !== ''){
+if (firstNum == '' && operationSymbol !== '' && secondNum !== '' && result != Infinity){
     firstNum = tempHolder;
 }       
 operationSymbol = element.innerHTML;
@@ -51,10 +51,7 @@ operationSymbol = element.innerHTML;
 }))
             
 clear.addEventListener('click', () => {
-                firstNum = '';
-                secondNum = ''
-                tempHolder = '';
-                total = '0';
+                    flush ();
                     displayScreen.textContent = total;
                     firstNum = total;
                     previouScreen.textContent = '';})
@@ -76,17 +73,28 @@ equal.addEventListener('click', () => {
                     operate(firstNum, secondNum, operationSymbol);
                     previouScreen.textContent = total+ " " + operationSymbol;   
                 } 
-            } )
+                if (result === Infinity || result === -Infinity) {
+                    flush();
+                }
+            } 
+            )
 backspace.addEventListener('click', () => {
                     tempHolder = tempHolder.slice(0, -1);
                     displayScreen.textContent = tempHolder;
                 }
             )
-    
-function operate(firstNum,secondNum, operationSymbol){
+            function flush () {
+                firstNum = '';
+                secondNum = '';
+                tempHolder = '';
+                total = '';
+            }
+            
+            function operate(firstNum,secondNum, operationSymbol){
+                
                 firstNum = parseFloat(firstNum);
                 secondNum = parseFloat(secondNum);
-            
+      
                 switch(operationSymbol) {
                     case '+': 
                     result = firstNum + secondNum;
@@ -99,15 +107,20 @@ function operate(firstNum,secondNum, operationSymbol){
                     result = firstNum * secondNum;
                         break;
                     case '/':
+                
                     result = firstNum / secondNum;
-                        break;
-                    
+                    break;
                     case '%':
-                        result = firstNum % secondNum;
+                    result = firstNum % secondNum;
                             break;
                         }
-                    total = result.toString()
-                    displayScreen.textContent =  total;
-                  
+                        if (isNaN(result) || result == Infinity || result == -Infinity) {
+                            displayScreen.textContent =  "Can't divide by 0!"
+                            previouScreen.textContent =  ""
+                        }
+                    else {
+                        total = Number((result).toFixed(4)).toString()
+                        displayScreen.textContent =  total;
+                      
+                    }    
             }
-
