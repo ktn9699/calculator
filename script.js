@@ -14,43 +14,46 @@ let tempHolder = '';
 let result = 0;
 let total = ''
 
-numKeys.forEach((element) => element.addEventListener('click', () => {
-    if (tempHolder === '0') {
-        tempHolder = ''; 
-    }
-       tempHolder += element.textContent;
-        displayScreen.textContent = tempHolder;
-    }))
-
-    operateKeys.forEach((element) => element.addEventListener('click', () => { 
-        if (firstNum == '') {
-            firstNum = tempHolder;
-            tempHolder = '';
+// 
+for (let i = 0; i < numKeys.length; i++) {    
+    numKeys[i].addEventListener('click', () => {
+        if (tempHolder === '0') {
+            tempHolder = ''; 
         }
-if (firstNum !== '' && operationSymbol !== '') {
-    secondNum = tempHolder;
+           tempHolder += numKeys[i].textContent;
+            displayScreen.innerHTML = tempHolder;
+        })
+        }
+       
+        for (let i = 0; i < operateKeys.length; i++) {
+            operateKeys[i].addEventListener('click', () => { 
+                if (firstNum == '') {
+                    firstNum = tempHolder;
+                    tempHolder = '';
+                }
+        if (firstNum !== '' && operationSymbol !== '') {
+            secondNum = tempHolder;
+        
+        }
+       
+        if (firstNum !== '' && operationSymbol !== '' && secondNum !== ''){
+            displayScreen.textContent= 0;
+            operate(firstNum,secondNum, operationSymbol)
+            firstNum = total;   
+            secondNum = '';
+            tempHolder = '0';
+        }       
+        
+        if (firstNum == '' && operationSymbol !== '' && secondNum !== ''){
+            firstNum = tempHolder;
+        }       
+        operationSymbol = operateKeys[i].innerHTML;
+            previouScreen.textContent = firstNum+ " " + operationSymbol;   
 
-}
-
-if (firstNum !== '' && operationSymbol !== '' && secondNum !== ''){
-    displayScreen.textContent= '0';
-    operate(firstNum,secondNum, operationSymbol)
-    firstNum = total;   
-    secondNum = '';
-    tempHolder = '';
-}       
-
-if (firstNum == '' && operationSymbol !== '' && secondNum !== ''){
-    firstNum = tempHolder;
-}       
-operationSymbol = element.textContent;
-    previouScreen.textContent = firstNum+ " " + operationSymbol;   
-
-if (firstNum == '0') {
-        previouScreen.textContent = '';
-    }
-}))
-    
+        if (firstNum == '0') {
+                previouScreen.textContent = '';
+            }
+    })}
             clear.addEventListener('click', () => {
                 firstNum = '';
                 secondNum = ''
@@ -77,19 +80,12 @@ if (firstNum == '0') {
                     operate(firstNum, secondNum, operationSymbol);
                 } 
             } )
-            
             backspace.addEventListener('click', () => {
-            if (secondNum == '' && firstNum !== '') {
-                tempHolder = tempHolder.slice(0, -1);
-                displayScreen.textContent = tempHolder;
-            }
-           
-             if (total !== '') {
-                total = total.slice(0,-1);
-                displayScreen.textContent = total;
-             }
-            } )
-      
+                    tempHolder = tempHolder.slice(0, -1);
+                    displayScreen.textContent = tempHolder;
+                }
+            )
+    
             function operate(firstNum,secondNum, operationSymbol){
                 firstNum = parseFloat(firstNum);
                 secondNum = parseFloat(secondNum);
@@ -98,13 +94,13 @@ if (firstNum == '0') {
                     case '+': 
                     result = firstNum + secondNum;
                     break;
+
                     case '-':
                     result = firstNum - secondNum;
                     break;
                     case '*':
                     result = firstNum * secondNum;
-                    break;
-
+                        break;
                     case '/':
                     result = firstNum / secondNum;
                         break;
@@ -113,3 +109,4 @@ if (firstNum == '0') {
                     displayScreen.textContent =  total;
                   
             }
+
