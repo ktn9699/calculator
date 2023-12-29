@@ -26,17 +26,11 @@ if (current === '0') {
 
 // Getting the symbol that is clicked by going through all of the symbols. 
 // When a symbol is clicked, the input will be inside of 'currentKey'. 
-function getOperator (element) {
-    operator = element;
-    previous = current;
-    current = '';
-}
+
 operateKeys.forEach((element) => element.addEventListener('click', () => {
-   
     operator = element.textContent;
     previous = current;
     current = '';
-    
 if (operator.textContent !== '') {
     previouScreen.textContent = previous + ' ' + operator;
     displayScreen.textContent = previous;
