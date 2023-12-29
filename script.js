@@ -15,78 +15,75 @@ let result = 0;
 let total = ''
 
 // 
-for (let i = 0; i < numKeys.length; i++) {    
-    numKeys[i].addEventListener('click', () => {
-        if (tempHolder === '0') {
-            tempHolder = ''; 
-        }
-           tempHolder += numKeys[i].textContent;
-            displayScreen.innerHTML = tempHolder;
-        })
-        }
-       
-        for (let i = 0; i < operateKeys.length; i++) {
-            operateKeys[i].addEventListener('click', () => { 
-                if (firstNum == '') {
-                    firstNum = tempHolder;
-                    tempHolder = '';
-                }
-        if (firstNum !== '' && operationSymbol !== '') {
-            secondNum = tempHolder;
-        
-        }
-       
-        if (firstNum !== '' && operationSymbol !== '' && secondNum !== ''){
-            displayScreen.textContent= 0;
-            operate(firstNum,secondNum, operationSymbol)
-            firstNum = total;   
-            secondNum = '';
-            tempHolder = '0';
-        }       
-        
-        if (firstNum == '' && operationSymbol !== '' && secondNum !== ''){
+numKeys.forEach((element) => element.addEventListener('click', () => {
+    if (tempHolder === '0') {
+        tempHolder = ''; 
+    }
+       tempHolder += element.textContent;
+        displayScreen.innerHTML = tempHolder;
+    }))
+    
+operateKeys.forEach((element) => element.addEventListener('click', () => { 
+        if (firstNum == '') {
             firstNum = tempHolder;
-        }       
-        operationSymbol = operateKeys[i].innerHTML;
-            previouScreen.textContent = firstNum+ " " + operationSymbol;   
+            tempHolder = '';
+        }
+if (firstNum !== '' && operationSymbol !== '') {
+    secondNum = tempHolder;
 
-        if (firstNum == '0') {
-                previouScreen.textContent = '';
-            }
-    })}
-            clear.addEventListener('click', () => {
+}
+
+if (firstNum !== '' && operationSymbol !== '' && secondNum !== ''){
+    displayScreen.textContent= 0;
+    operate(firstNum,secondNum, operationSymbol)
+    firstNum = total;   
+    secondNum = '';
+    tempHolder = '';
+}       
+
+if (firstNum == '' && operationSymbol !== '' && secondNum !== ''){
+    firstNum = tempHolder;
+}       
+operationSymbol = element.innerHTML;
+    previouScreen.textContent = firstNum+ " " + operationSymbol;   
+
+
+}))
+            
+clear.addEventListener('click', () => {
                 firstNum = '';
                 secondNum = ''
                 tempHolder = '';
                 total = '0';
                     displayScreen.textContent = total;
                     firstNum = total;
-                    previouScreen.textContent = '';})
+                    previouScreen.textContent = '0';})
  
-              decimal.addEventListener('click', () => {
+decimal.addEventListener('click', () => {
                 if (!tempHolder.includes(".")) {
                     tempHolder += '.'; }
             })
         
-            negative.addEventListener('click', () => {
+negative.addEventListener('click', () => {
                 if (tempHolder !== '') {
                     tempHolder = parseFloat(tempHolder) * -1;
                     displayScreen.textContent = tempHolder;
                 }});
 
-            equal.addEventListener('click', () => {
+equal.addEventListener('click', () => {
                 if (tempHolder != '' && firstNum !== '') {
                     secondNum = tempHolder;
                     operate(firstNum, secondNum, operationSymbol);
+                    previouScreen.textContent = total+ " " + operationSymbol;   
                 } 
             } )
-            backspace.addEventListener('click', () => {
+backspace.addEventListener('click', () => {
                     tempHolder = tempHolder.slice(0, -1);
                     displayScreen.textContent = tempHolder;
                 }
             )
     
-            function operate(firstNum,secondNum, operationSymbol){
+function operate(firstNum,secondNum, operationSymbol){
                 firstNum = parseFloat(firstNum);
                 secondNum = parseFloat(secondNum);
             
@@ -104,7 +101,11 @@ for (let i = 0; i < numKeys.length; i++) {
                     case '/':
                     result = firstNum / secondNum;
                         break;
-                    }
+                    
+                    case '%':
+                        result = firstNum % secondNum;
+                            break;
+                        }
                     total = result.toString()
                     displayScreen.textContent =  total;
                   
