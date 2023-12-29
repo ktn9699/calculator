@@ -5,7 +5,8 @@ body {
     min-height: 100vh;
     background: rgb(131,58,180);
     background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
-
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: bold;
 }
 
 
@@ -25,10 +26,16 @@ button {
     flex: 1;
     border: none;
     mix-blend-mode: screen;
-    
     cursor: pointer;
 }
 
+button:hover {background-color: #ffaf03}
+
+button:active {
+  background-color: #d65206;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 
 .rowFive .zero {
 flex: 2 auto;
@@ -38,36 +45,38 @@ flex: 2 auto;
     mix-blend-mode: screen;
     border-radius: 10px;
     text-align: right;
-    height: 100px;
+    margin-bottom: 8px;
     width: 100%;
-    margin-bottom: 10px;
-    padding-right: 0px;
-
- 
-
+    height: 100%;
+    overflow: hidden;
+  
 }
 
+
 .display {
-   font-size: 40px;
-   margin-bottom: 0;
+   font-size: 35px;
+   margin-bottom: 0px;
    margin-top: 0px;
    margin-right: 30px;
-   font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-weight: bold;
+
 }
 
 .previousScreen {
     margin-bottom: 0px;
     margin-right: 30px;
-}
+    font-size: 13px;
 
- .B {
-   
- }
+}
 
 .B div {
     display: flex;
     justify-content: space-around;
     flex-direction: row;
 
+}
+
+.by {
+font-size: 20px;
+color: white;
+text-align: center 
 }
