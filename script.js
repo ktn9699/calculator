@@ -57,7 +57,7 @@ clear.addEventListener('click', () => {
                 total = '0';
                     displayScreen.textContent = total;
                     firstNum = total;
-                    previouScreen.textContent = '0';})
+                    previouScreen.textContent = '';})
  
 decimal.addEventListener('click', () => {
                 if (!tempHolder.includes(".")) {
