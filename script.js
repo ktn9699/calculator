@@ -123,4 +123,8 @@ backspace.addEventListener('click', () => {
                         displayScreen.textContent =  total;
                       
                     }    
+<<<<<<< HEAD
             }
+=======
+            }
+>>>>>>> c5cf7003e87897d8f5a6acb38989be840dc328cc
