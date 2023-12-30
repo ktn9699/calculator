@@ -19,8 +19,10 @@ numKeys.forEach((element) => element.addEventListener('click', () => {
     if (tempHolder === '0') {
         tempHolder = ''; 
     }
-       tempHolder += element.textContent;
-        displayScreen.innerHTML = tempHolder;
+
+    tempHolder += element.textContent;
+    displayScreen.innerHTML = tempHolder;
+ 
     }))
     
 operateKeys.forEach((element) => element.addEventListener('click', () => { 
@@ -52,7 +54,7 @@ operationSymbol = element.innerHTML;
             
 clear.addEventListener('click', () => {
                     flush ();
-                    displayScreen.textContent = total;
+                    displayScreen.textContent = '0';
                     firstNum = total;
                     previouScreen.textContent = '';})
  
@@ -68,16 +70,21 @@ negative.addEventListener('click', () => {
                 }});
 
 equal.addEventListener('click', () => {
-                if (tempHolder != '' && firstNum !== '') {
-                    secondNum = tempHolder;
-                    operate(firstNum, secondNum, operationSymbol);
-                    previouScreen.textContent = total+ " " + operationSymbol;   
-                } 
+     if (firstNum !== '' && operationSymbol!== '' && secondNum == ''){
+        secondNum = tempHolder;
+        operate(firstNum, secondNum ,operationSymbol)
+        tempHolder = total;
+        total = '';
+        firstNum = ''
+        secondNum = ''
+     }
+    
                 if (result === Infinity || result === -Infinity) {
                     flush();
                 }
             } 
             )
+
 backspace.addEventListener('click', () => {
                     tempHolder = tempHolder.slice(0, -1);
                     displayScreen.textContent = tempHolder;
@@ -124,3 +131,5 @@ backspace.addEventListener('click', () => {
                       
                     }   
                 }
+
+                
