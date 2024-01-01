@@ -30,11 +30,14 @@ operateKeys.forEach((element) => element.addEventListener('click', () => {
             firstNum = tempHolder;
             tempHolder = '';
         }
-if (firstNum !== '' && operationSymbol !== '') {
+    // After pressing equal button, calculator will reset to default values (0) for new expression
+    if (firstNum == ''&& secondNum == ''){
+    firstNum = total; 
+    second = tempHolder
+    }
+        if (firstNum !== '' && operationSymbol !== '') {
     secondNum = tempHolder;
-
 }
-
 if (firstNum !== '' && operationSymbol !== '' && secondNum !== ''){
     displayScreen.textContent= 0;
     operate(firstNum,secondNum, operationSymbol)
@@ -73,12 +76,10 @@ equal.addEventListener('click', () => {
      if (firstNum !== '' && operationSymbol!== '' && secondNum == ''){
         secondNum = tempHolder;
         operate(firstNum, secondNum ,operationSymbol)
-        tempHolder = total;
-        total = '';
+        tempHolder = '';
         firstNum = ''
         secondNum = ''
      }
-    
                 if (result === Infinity || result === -Infinity) {
                     flush();
                 }
@@ -128,8 +129,6 @@ backspace.addEventListener('click', () => {
                     else {
                         total = Number((result).toFixed(4)).toString()
                         displayScreen.textContent =  total;
-                      
                     }   
                 }
-
-                
+    
